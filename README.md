@@ -413,9 +413,9 @@ $$w_{t+1} = w_t - \alpha \cdot m_t$$
 
 我们还经常听到代价函数和目标函数，它们之间差异如下：  
 - 损失函数(Loss Function)是计算一个样本的模型输出与真实标签的差异  
-Loss $=f\left(y^{\wedge}, y\right)$  
+$$Loss = f\left(y^{\wedge}, y\right)$$
 - 代价函数(Cost Function)是计算整个样本集的模型输出与真实标签的差异，是所有样本损失函数的平均值  
-$\cos t=\frac{1}{N} \sum_{i}^{N} f\left(y_{i}^{\wedge}, y_{i}\right)$  
+$$\cos t=\frac{1}{N} \sum_{i}^{N} f\left(y_{i}^{\wedge}, y_{i}\right)$$  
 - 目标函数(Objective Function)就是代价函数加上**正则项**(控制模型的复杂度，从而防止过拟合)   
 
 #### 1. 均方误差 MSELoss
