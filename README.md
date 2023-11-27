@@ -218,7 +218,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
 具体包含 **卷积层,池化层,全连接层** 和 **激活函数**  
 参考[1] https://pytorch.zhangxiann.com/3-mo-xing-gou-jian/3.2-juan-ji-ceng
    <p align='center'>
-    <img src="./img/lenet.png" width=20%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/lenet.png" width=20%>
     </p>
  
 1. ###  二维卷积 nn.Conv2d()
@@ -241,7 +241,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
     $$O = \displaystyle\frac{5 -3 + 2 \times 0}{1} +1 = 3$$  
     #### 图例
     <p align='center'>
-    <img src="./img/2d-conv-2.gif" width=40%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/2d-conv-2.gif" width=40%>
     </p>
 
     ##### 计算示例 网络模型中的卷积层输出尺寸
@@ -278,7 +278,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
         - 这个 `5x5` 是由于上面步骤中卷积和池化操作对特征图尺寸的影响而来。总共有 `16*5*5` 个特征需要被全连接层处理  
     #### 图例
     <p align='center'>
-    <img src="./img/lenet2.png" width=85%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/lenet2.png" width=85%>
     </p>
 
 2. ### 池化层(下采样层) Pooling(Downsampling)
@@ -291,7 +291,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
         - 提升invariance(不变性)，这种不变性包括translation(平移)，rotation(旋转)，scale(尺度)  
     #### 图例
     <p align='center'>
-    <img src="./img/maxpooling.png" width=40%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/maxpooling.png" width=40%>
     </p>
 
     #### 代码示例
@@ -318,7 +318,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
 
     #### 图例
     <p align='center'>
-    <img src="./img/fc.png" width=45%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/fc.png" width=45%>
     </p>
 
     - 红色为激活状态   
@@ -340,7 +340,7 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
     #### 图例
     下图给出了多种常用的激活函数,其中最简单也是最常用的便是`ReLU()`
     <p align='center'>
-    <img src="./img/sigmoid.png" width=70%>
+    <img src="https://github.com/Ricardo-H/Tutorial_PyTorch/blob/main/img/sigmoid.png" width=70%>
     </p>
     
 
