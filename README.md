@@ -44,10 +44,10 @@ _pytorch代码入门(自定义`Dataset`类 和 `LeNet`网络模型)_
 
 ## PyTorch代码详解
 ### 一, 数据集类 Dataset  
-    自定义数据集类  `class CIFAR10Dataset(Dataset)`  
-    用于加载和处理CIFAR-10数据集
+自定义数据集类  `class CIFAR10Dataset(Dataset)`  
+用于加载和处理CIFAR-10数据集
 
-    共分为三个函数部分:
+共分为三个函数部分:
    1. `__init__(self, root_dir, train=True, transform=None)`  
         ***"与每个特定数据集的文件结构有关，决定如何读取并处理数据，用于训练"***
       
@@ -80,7 +80,8 @@ _pytorch代码入门(自定义`Dataset`类 和 `LeNet`网络模型)_
             - `Image.fromarray()`创建一个PIL图像对象  
         3. 使用传入的变量`transform`进行数据增强预处理   
 
-### 二, 数据预处理和增强 transform
+### 二, 数据预处理和增强 transform  
+
 - 数据增强包括各种调整大小、裁剪、数据增强等操作的函数  
     - **一般情况下，数据增强操作在训练集上使用，而测试集上不使用**
 - 两个必要的数据预处理操作是
@@ -100,13 +101,13 @@ _pytorch代码入门(自定义`Dataset`类 和 `LeNet`网络模型)_
   
 
 ### 三, 数据加载器 DataLoader
-    `DataLoader` 是一个预先定义好的类，设计与`Dataset`类配合使用，便于高效地加载数据集
-    ```python
-    DataLoader(trainset, batch_size=16, shuffle=True, num_workers=4)
-    ```      
-    - `batch_size`  控制批次大小  
-    - `shuffle` 是否在每个epoch打乱数据  
-    - `num_workers` 使用多少进程加载数据   
+`DataLoader` 是一个预先定义好的类，设计与`Dataset`类配合使用，便于高效地加载数据集
+```python
+DataLoader(trainset, batch_size=16, shuffle=True, num_workers=4)
+```      
+- `batch_size`  控制批次大小  
+- `shuffle` 是否在每个epoch打乱数据  
+- `num_workers` 使用多少进程加载数据   
 
 ### 四, 定义训练模型CNN  
 
