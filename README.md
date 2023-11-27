@@ -211,7 +211,40 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
 ```
 
 ## 可视化模型验证结果
+### 可视化方法 **TensorBoard**
+TensorBoardX 可视化的流程需要首先编写 Python 代码把需要可视化的数据保存到 `event file` 文件中  
+然后再使用 TensorBoardX 读取 `event file` 展示到网页中  
 
+下面的代码是一个保存`event file`的例子:
+```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from tensorboardX import SummaryWriter
+    from common_tools import set_seed
+    max_epoch = 100
+
+    writer = SummaryWriter(comment='test_comment', filename_suffix="test_suffix")
+
+    for x in range(max_epoch):
+
+        writer.add_scalar('y=2x', x * 2, x)
+        writer.add_scalar('y=pow_2_x', 2 ** x, x)
+
+        writer.add_scalars('data/scalar_group', {"xsinx": x * np.sin(x),
+                                                 "xcosx": x * np.cos(x)}, x)
+
+    writer.close()
+```
+- 执行完后，会在当前文件夹生成一个`runs`的文件夹，里面保存的就是数据的 `event file`
+- 然后在命令行中输入
+  ```shell
+  tensorboard --logdir=./runs
+  ```
+  启动 `tensorboard` 服务，其中`./runs`是runs文件夹的路径。然后命令行会显示 `tensorboard` 的访问地址：
+  ```shell
+  TensorBoard 1.9.0 at http://LAPTOP-DPDNNJSU:6006 (Press CTRL+C to quit)
+  ```
+  - 在 浏览器打开其中的网址即可显示实时的可视化结果
 
 ## CNN网络模型 -- ***LeNet*** (详解)
 >本节通过一个发布于1989年的CNN网络模型: **LeNet** 来学习CNN模型每个层的意义与用法  
