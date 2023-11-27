@@ -426,7 +426,7 @@ criterion = nn.MSELoss(reduction='none')
 
     $$MSE = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$$
     - $y_i$ 是真实值
-    - $\hat{y}_i $ 是模型对第 i 个样本的预测值
+    - $\hat{y}_i$ 是模型对第 i 个样本的预测值
 
 #### 2. 交叉熵损失 / 对数损失 CrossEntropyLoss
 > 目的是最小化模型预测的概率分布和实际标签的概率分布之间的差异  
