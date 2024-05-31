@@ -17,10 +17,13 @@
 - 推荐新手使用[google colab](https://colab.google/)的在线服务器运行notebook,不需要配置环境,直接运行,非常方便.  
 - 若有疑问欢迎提出issue,  
 或直接联系我的邮件: `ricardo.hyl666@gmail.com`,一起讨论学习.
-<br>  
----  
-# Tutorical.md  
-# 基于`LeNet`的`CIFAR-10`图像分类  
+
+<br>
+
+---
+
+## Tutorical.md  
+## 基于`LeNet`的`CIFAR-10`图像分类  
 _pytorch代码入门(自定义`Dataset`类 和 `LeNet`网络模型)_
 
 ## 前提准备
