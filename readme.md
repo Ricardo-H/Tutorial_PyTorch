@@ -269,42 +269,42 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
 <img src="./img/2d-conv-2.gif" width=40%>
 </p>
 
-    ##### 计算示例 网络模型中的卷积层输出尺寸
-    ```python
-    class LeNet(nn.Module):
-        def __init__(self):
-            super(LeNet, self).__init__()
-            self.conv1 = nn.Conv2d(3, 6, 5)                     
-            self.conv2 = nn.Conv2d(6, 16, 5)
-            self.pool = nn.MaxPool2d(kernel_size=2, stride=2)   
-            self.fc1 = nn.Linear(16 * 5 * 5, 120)           
-            self.fc2 = nn.Linear(120, 84)
-            self.fc3 = nn.Linear(84, 10)
-    ```
-    1. 第一个卷积层 (self.conv1):  
-        - 这层使用了一个 3x3 的卷积核。这个尺寸决定了卷积后输出特征图的尺寸。  
-        在LeNet中，通常假设stride为1且无padding，所以每次卷积操作后，特征图的尺寸会缩小 
-        - 例如，输入图像大小为 `32x32`，经过此层后尺寸将变为 `28x28` (因为 `32-5+1=28`)
+##### 计算示例 网络模型中的卷积层输出尺寸
+```python
+class LeNet(nn.Module):
+  def __init__(self):
+      super(LeNet, self).__init__()
+      self.conv1 = nn.Conv2d(3, 6, 5)                     
+      self.conv2 = nn.Conv2d(6, 16, 5)
+      self.pool = nn.MaxPool2d(kernel_size=2, stride=2)   
+      self.fc1 = nn.Linear(16 * 5 * 5, 120)           
+      self.fc2 = nn.Linear(120, 84)
+      self.fc3 = nn.Linear(84, 10)
+```
+1. 第一个卷积层 (self.conv1):  
+  - 这层使用了一个 3x3 的卷积核。这个尺寸决定了卷积后输出特征图的尺寸。  
+  在LeNet中，通常假设stride为1且无padding，所以每次卷积操作后，特征图的尺寸会缩小 
+  - 例如，输入图像大小为 `32x32`，经过此层后尺寸将变为 `28x28` (因为 `32-5+1=28`)
 
-    2. 第一个池化层 (self.pool):   
-        - 使用 2x2 窗口的最大池化层会将特征图的高度和宽度各减半  
-        - 经过池化后，特征图的尺寸会从 `28x28` 变为 `14x14`
+2. 第一个池化层 (self.pool):   
+  - 使用 2x2 窗口的最大池化层会将特征图的高度和宽度各减半  
+  - 经过池化后，特征图的尺寸会从 `28x28` 变为 `14x14`
 
-    3. 第二个卷积层 (self.conv2): 
-        - 使用一个 5x5 的卷积核。应用于池化后的特征图，它会进一步减小尺寸  
-        - 输入尺寸是 `14x14`，输出将是 `10x10`（因为 `14-5+1=10`） 
+3. 第二个卷积层 (self.conv2): 
+  - 使用一个 5x5 的卷积核。应用于池化后的特征图，它会进一步减小尺寸  
+  - 输入尺寸是 `14x14`，输出将是 `10x10`（因为 `14-5+1=10`） 
 
-    4. 第二个池化层(self.pool): 
-        - 再次应用 2x2 最大池化，尺寸将再次缩小一半
-        - 从 `10x10` 变为 `5x5`
+4. 第二个池化层(self.pool): 
+  - 再次应用 2x2 最大池化，尺寸将再次缩小一半
+  - 从 `10x10` 变为 `5x5`
 
-    5. 第一个全连接层 (self.fc1): 
-        - 这里的输入特征数为 `16 * 5 * 5`。
-        - 这个 `5x5` 是由于上面步骤中卷积和池化操作对特征图尺寸的影响而来。总共有 `16*5*5` 个特征需要被全连接层处理  
-    #### 图例
-    <p align='center'>
-    <img src="./img/lenet2.png" width=85%>
-    </p>
+5. 第一个全连接层 (self.fc1): 
+  - 这里的输入特征数为 `16 * 5 * 5`。
+  - 这个 `5x5` 是由于上面步骤中卷积和池化操作对特征图尺寸的影响而来。总共有 `16*5*5` 个特征需要被全连接层处理  
+#### 图例
+<p align='center'>
+<img src="./img/lenet2.png" width=85%>
+</p>
 
 2. ### 池化层(下采样层) Pooling(Downsampling)
     > 常用 *`最大池化`* 与 *`平均池化`*，本文介绍 最大池化 Max Pooling
