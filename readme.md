@@ -346,8 +346,8 @@ class LeNet(nn.Module):
 <img src="./img/fc.png" width=45%>
 </p>
 
-    - 红色为激活状态   
-    - 两层fc全连接层用于整合提取到的特征,用于最终分类
+- 红色为激活状态   
+- 两层fc全连接层用于整合提取到的特征,用于最终分类
 
 4. ### 激活函数 nn.ReLU()
     - `ReLU`全称为"Rectified Linear Unit"(修正线性单元),是最常用的激活函数
@@ -468,8 +468,8 @@ loss = loss_fn(outputs, labels)
 ```
 - 数学式(**多分类**情况)
     $$H(y, \hat{y}) = -\sum_{i=1}^{N} \sum_{c=1}^{C} y_{ic} \log(\hat{y}_{ic})$$ 
-    - c : 是分类标签
-    - $y_{ic}$：表示第 i 个样本属于类别 c 的真实标签。
+ - c : 是分类标签
+ - $ y_{ic} $：表示第 i 个样本属于类别 c 的真实标签。
 
 ## 参考
 [1] https://pytorch.zhangxiann.com/  
@@ -478,8 +478,3 @@ loss = loss_fn(outputs, labels)
 
 ## 鸣谢
 感谢来自李师兄的push,没有他就没有这篇笔记的整理与总结
-
-
-
-
-
