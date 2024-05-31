@@ -34,104 +34,104 @@ _pytorch代码入门(自定义`Dataset`类 和 `LeNet`网络模型)_
     numpy == 1.19.5
 
 - 数据集"CIFAR-10"下载并解压  
-    1. 方法一:Ubuntu命令  
-        ```shell
-        # 下载  
-        wget https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz  
-        # 解压  
-        tar -xzvf cifar-10-python.tar.gz    
-        ```
-    2. 方法二:Python代码  
-        ```python
-        import torchvision
-        train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True)
-        ```
+ 1. 方法一:Ubuntu命令  
+     ```shell
+     # 下载  
+     wget https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz  
+     # 解压  
+     tar -xzvf cifar-10-python.tar.gz    
+     ```
+ 2. 方法二:Python代码  
+     ```python
+     import torchvision
+     train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True)
+     ```
 
 ## 数据集 ***CIFAR-10***
 - 数据集文件结构
-    ```shell
-    cifar-10-batches-py/
-        data_batch_1
-        data_batch_2
-        data_batch_3
-        data_batch_4
-        data_batch_5
-        test_batch
-        batches.meta
-    ```
+ ```shell
+ cifar-10-batches-py/
+     data_batch_1
+     data_batch_2
+     data_batch_3
+     data_batch_4
+     data_batch_5
+     test_batch
+     batches.meta
+ ```
 - 数据集文件说明
-    - `data_batch_1/2/3/4/5`  
-        五个训练批次，每个批次包含10000张图像，图像大小为32x32，共有10个类别  
-    - `test_batch`  
-        一个测试批次，包含10000张图像，图像大小为32x32，共有10个类别  
-    - `batches.meta`  
-        一个Python字典，包含了类别标签的名称
+ - `data_batch_1/2/3/4/5`  
+     五个训练批次，每个批次包含10000张图像，图像大小为32x32，共有10个类别  
+ - `test_batch`  
+     一个测试批次，包含10000张图像，图像大小为32x32，共有10个类别  
+ - `batches.meta`  
+     一个Python字典，包含了类别标签的名称
 
 ## PyTorch代码详解
 ### 一, 数据集类 Dataset  
-    自定义数据集类  `class CIFAR10Dataset(Dataset)`  
-    用于加载和处理CIFAR-10数据集
+ 自定义数据集类  `class CIFAR10Dataset(Dataset)`  
+ 用于加载和处理CIFAR-10数据集
 
-    共分为三个函数部分:
-   1. `__init__(self, root_dir, train=True, transform=None)`  
-        ***"与每个特定数据集的文件结构有关，决定如何读取并处理数据，用于训练"***
-      
-        1. CIFAR-10的数据分为**五个训练批次**和**一个测试批次**，遍历文件`data_batch_1/2/3/4/5`  
-        2. 使用`dict = pickle.load(...)`读取并将数据追加到两个重要类属性  
-                  ***self.data*** 和 ***self.labels***  
-        3. 处理图像数据格式  
-            ```python
-            self.data = torch.cat([torch.tensor(d).view(-1, 3, 32, 32) for d in self.data])
-            ```
-           - `view`用于将从文件中读取到的**一维数组形式**转换为**四维tensor（[N,C,H,W]）**
-                - 第一个维度N表示每个批次中的图像数量；  
-                - 此处批次大小N=-1,代表自动计算第一维的大小。  
-           - `cat`方法沿着第0维(即，批次大小维度N)，连接每个批次对应的**4维tensor**
-                目的，  
-                为了将CIFAR-10数据集中分散在多个批次的数据合并成一个单一，连续的数据集   
+ 共分为三个函数部分:
+1. `__init__(self, root_dir, train=True, transform=None)`  
+     ***"与每个特定数据集的文件结构有关，决定如何读取并处理数据，用于训练"***
    
-   2. `len(self)`  
-        获取数据集大小  
-   3. `getitem(self, idx)`  
-       1. 通过标签`idx`来访问数据集的单个样本(图像和标签)  
-       2. 图像数据(tensor格式)转换为PIL图像格式  
-            ```python
-            image = Image.fromarray(image.numpy().transpose((1, 2, 0)))
-            ```   
-            其中，  
-            - `image.numpy()`将`image`的类型从PyTorch张量转换为NumPy数组
-            - `.transpose((1,2,0))`改变数组的维度顺序，  
-            从[c, h, w] 转换为 [h, w, c], 适应于PIL图像库格式
-            - `Image.fromarray()`创建一个PIL图像对象  
-        3. 使用传入的变量`transform`进行数据增强预处理   
+     1. CIFAR-10的数据分为**五个训练批次**和**一个测试批次**，遍历文件`data_batch_1/2/3/4/5`  
+     2. 使用`dict = pickle.load(...)`读取并将数据追加到两个重要类属性  
+               ***self.data*** 和 ***self.labels***  
+     3. 处理图像数据格式  
+         ```python
+         self.data = torch.cat([torch.tensor(d).view(-1, 3, 32, 32) for d in self.data])
+         ```
+        - `view`用于将从文件中读取到的**一维数组形式**转换为**四维tensor（[N,C,H,W]）**
+             - 第一个维度N表示每个批次中的图像数量；  
+             - 此处批次大小N=-1,代表自动计算第一维的大小。  
+        - `cat`方法沿着第0维(即，批次大小维度N)，连接每个批次对应的**4维tensor**
+             目的，  
+             为了将CIFAR-10数据集中分散在多个批次的数据合并成一个单一，连续的数据集   
+   
+2. `len(self)`  
+     获取数据集大小  
+3. `getitem(self, idx)`  
+    1. 通过标签`idx`来访问数据集的单个样本(图像和标签)  
+    2. 图像数据(tensor格式)转换为PIL图像格式  
+         ```python
+         image = Image.fromarray(image.numpy().transpose((1, 2, 0)))
+         ```   
+         其中，  
+         - `image.numpy()`将`image`的类型从PyTorch张量转换为NumPy数组
+         - `.transpose((1,2,0))`改变数组的维度顺序，  
+         从[c, h, w] 转换为 [h, w, c], 适应于PIL图像库格式
+         - `Image.fromarray()`创建一个PIL图像对象  
+     3. 使用传入的变量`transform`进行数据增强预处理   
 
 ### 二, 数据预处理和增强 transform
-    - 数据增强包括各种调整大小、裁剪、数据增强等操作的函数  
-        - **一般情况下，数据增强操作在训练集上使用，而测试集上不使用**
-    - 两个必要的数据预处理操作是
-        - 将PIL图像转换为PyTorch张量,  
-            `transforms.ToTensor()`  
-            \* 同时也自动将图像数据从`[0-255]`的范围缩放到`[0-1]`的范围(*归一化*)，  
-            \* 并将数据格式从[H, W, C]转换为[C, H, W]  
+ - 数据增强包括各种调整大小、裁剪、数据增强等操作的函数  
+     - **一般情况下，数据增强操作在训练集上使用，而测试集上不使用**
+ - 两个必要的数据预处理操作是
+     - 将PIL图像转换为PyTorch张量,  
+         `transforms.ToTensor()`  
+         \* 同时也自动将图像数据从`[0-255]`的范围缩放到`[0-1]`的范围(*归一化*)，  
+         \* 并将数据格式从[H, W, C]转换为[C, H, W]  
             
-        - 将张量标准化  
-            `transforms.Normalize(mean, std)`  
-            \* 图像数据大小从`[0,1]`缩放到`[-1,1]`
-            \* 使所有特征都是中心化的且具有相同的尺度
+     - 将张量标准化  
+         `transforms.Normalize(mean, std)`  
+         \* 图像数据大小从`[0,1]`缩放到`[-1,1]`
+         \* 使所有特征都是中心化的且具有相同的尺度
 
             
-            $$ \text{image} = \frac{\text{image} - \text{mean}}{\text{std}} $$  
+      $$ \text{image} = \frac{\text{image} - \text{mean}}{\text{std}} $$  
             
   
 
 ### 三, 数据加载器 DataLoader
-    `DataLoader` 是一个预先定义好的类，设计与`Dataset`类配合使用，便于高效地加载数据集
-    ```python
-    DataLoader(trainset, batch_size=16, shuffle=True, num_workers=4)
-    ```      
-    - `batch_size`  控制批次大小  
-    - `shuffle` 是否在每个epoch打乱数据  
-    - `num_workers` 使用多少进程加载数据   
+ `DataLoader` 是一个预先定义好的类，设计与`Dataset`类配合使用，便于高效地加载数据集
+ ```python
+ DataLoader(trainset, batch_size=16, shuffle=True, num_workers=4)
+ ```      
+ - `batch_size`  控制批次大小  
+ - `shuffle` 是否在每个epoch打乱数据  
+ - `num_workers` 使用多少进程加载数据   
 
 ### 四, 定义训练模型CNN  
 
