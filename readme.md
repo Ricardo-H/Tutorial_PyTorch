@@ -242,9 +242,9 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
 >本节通过一个发布于1989年的CNN网络模型: **LeNet** 来学习CNN模型每个层的意义与用法  
 具体包含 **卷积层,池化层,全连接层** 和 **激活函数**  
 参考[1] https://pytorch.zhangxiann.com/3-mo-xing-gou-jian/3.2-juan-ji-ceng
-   <p align='center'>
-    <img src="./img/lenet.png" width=20%>
-    </p>
+<p align='center'>
+<img src="./img/lenet.png" width=20%>
+</p>
  
 1. ###  二维卷积 nn.Conv2d()
     - 将一个图像(输入)和一个模板(卷积核)进行卷积操作，得到一个新的图像(输出)  
@@ -265,9 +265,9 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
     下面例子的输入图片大小为 $5 \times 5$，卷积大小为 $3 \times 3$，stride 为 1，padding 为 0，所以输出图片大小为:  
     $$O = \displaystyle\frac{5 -3 + 2 \times 0}{1} +1 = 3$$  
     #### 图例
-    <p align='center'>
-    <img src="./img/2d-conv-2.gif" width=40%>
-    </p>
+<p align='center'>
+<img src="./img/2d-conv-2.gif" width=40%>
+</p>
 
     ##### 计算示例 网络模型中的卷积层输出尺寸
     ```python
@@ -315,9 +315,9 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
         - 保留主要特征，减少参数和计算量，防止过拟合
         - 提升invariance(不变性)，这种不变性包括translation(平移)，rotation(旋转)，scale(尺度)  
     #### 图例
-    <p align='center'>
-    <img src="./img/maxpooling.png" width=40%>
-    </p>
+<p align='center'>
+<img src="./img/maxpooling.png" width=40%>
+</p>
 
     #### 代码示例
     ```python
@@ -342,9 +342,9 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
     - bias：是否使用偏置
 
     #### 图例
-    <p align='center'>
-    <img src="./img/fc.png" width=45%>
-    </p>
+<p align='center'>
+<img src="./img/fc.png" width=45%>
+</p>
 
     - 红色为激活状态   
     - 两层fc全连接层用于整合提取到的特征,用于最终分类
