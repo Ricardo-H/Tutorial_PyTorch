@@ -364,9 +364,9 @@ model.load_state_dict(torch.load('lenet_state_dict.pth'))
     ```
     #### 图例
     下图给出了多种常用的激活函数,其中最简单也是最常用的便是`ReLU()`
-    <p align='center'>
-    <img src="./img/sigmoid.png" width=70%>
-    </p>
+<p align='center'>
+<img src="./img/sigmoid.png" width=70%>
+</p>
     
 
 ## 优化器 Optimizer (详解)
