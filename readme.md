@@ -6,9 +6,9 @@
    
 2. pyTorch的实战项目 - "基于LeNet的CIFAR10图像分类"的代码实现
    - 一键跑通简单版  
-    [CIFAR10_Resnet18(pretrain).ipynb.py](./CIFAR10_Resnet18(pretrain).ipynb.py)
+    [CIFAR10_Resnet18(pretrain).ipynb](./CIFAR10_Resnet18(pretrain).ipynb)
    - 详细讲解版本  
-    [CIFAR10_Lenet.ipynb.py](./CIFAR10_Lenet.ipynb.py)
+    [CIFAR10_Lenet.ipynb](./CIFAR10_Lenet.ipynb)
 
 <br>  
 
